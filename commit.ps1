@@ -5,3 +5,4 @@ set-content commitmsg.tmp $commitmsg
 git commit -s -F commitmsg.tmp
 pause
 remove-item commitmsg.tmp
+git push origin master
