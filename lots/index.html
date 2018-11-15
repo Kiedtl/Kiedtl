@@ -104,7 +104,7 @@ Echo-Banner
 Set-Content $LogFile "[VERBOSE] LOTS STARTED $date"
 
 # Remove environment variables that might mess up Scoop installation
-Remove-Item Env:\SCOOP
+Remove-Item Env:\SCOOP -ea si
 Write-Log "Removing SCOOP Environment variable" "verbose"
 
 # Install (Scoop)[http://github.com/lukesampson/scoop.wiki]
