@@ -101,7 +101,7 @@ if ( $Help ) {
 Echo-Banner
 
 # Create two files to log onto 
-Set-Content "[VERBOSE] LOTS STARTED $date" $LogFile
+Set-Content $LogFile "[VERBOSE] LOTS STARTED $date"
 
 # Remove environment variables that might mess up Scoop installation
 Remove-Item Env:\SCOOP
