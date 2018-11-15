@@ -8,5 +8,5 @@ function get-Weather($Location, $UserAgent, $Output, $Pause)
 }
 
 $filename = get-random 
-get-weather -Location Frederick+Maryland -Output C:/Users/$env:USERNAME/Documents/Weather/reports/$filename-frederick-maryland.htm -Pause false
+get-weather -Location Washingtion+DC -Output C:/Users/$env:USERNAME/Documents/Weather/reports/$filename-frederick-maryland.htm -Pause false
 start C:/Users/$env:USERNAME/Documents/Weather/reports/$filename-frederick-maryland.htm
