@@ -56,6 +56,7 @@ Write-Log "Removing SCOOP Environment variable" "verbose"
 Write-Log "Downloading SCOOP installer" "verbose"
 Invoke-WebRequest (new-object net.webclient).downloadstring('https://get.scoop.sh') 
 Write-Log "Installed Scoop" "verbose"
+Start-Sleep -s 30
 
 # Install the 'extras' and the 'main' bucket onto scoop
 scoop bucket add extras
