@@ -21,6 +21,61 @@ $usr = $env:USERNAME
 $date = Get-Date
 Set-Location C:\Users\$usr\
 
+
+
+############################################
+#    ___             _   _
+#   | __|  _ _ _  __| |_(_)___ _ _  ___
+#   | _| || | ' \/ _|  _| / _ \ ' \(_-<
+#   |_| \_,_|_||_\__|\__|_\___/_||_/__/
+#   
+############################################
+
+
+function Write-Log( $text, $lev ) {
+	$level = $lev.ToUpper()
+	Add-Content $LogFile "[$level]: $text"
+	if ( $Noisy ) {
+		Write-Host "[$level]: $text"
+	}
+}
+
+function Echo-Banner() {
+     Write-Host "`t _     ___  ____  ____     ___  _____   _____ _   _ _____"
+     Write-Host "`t| |   / _ \|  _ \|  _ \   / _ \|  ___| |_   _| | | | ____|"
+     Write-Host "`t| |  | | | | |_) | | | | | | | | |_      | | | |_| |  _|"
+     Write-Host "`t| |__| |_| |  _ <| |_| | | |_| |  _|     | | |  _  | |___"
+     Write-Host "`t|_____\___/|_| \_\____/   \___/|_|       |_| |_| |_|_____|"
+     Write-Host "`t"
+     Write-Host "`t          ____   ____ ____  ___ ____ _____ ____"
+     Write-Host "`t         / ___| / ___|  _ \|_ _|  _ \_   _/ ___|"
+     Write-Host "`t         \___ \| |   | |_) || || |_) || | \___ \"
+     Write-Host "`t          ___) | |___|  _ < | ||  __/ | |  ___) |"
+     Write-Host "`t         |____/ \____|_| \_\___|_|    |_| |____/   "
+     Write-Host "`t                                                  `a"      
+}
+
+function Echo-Help() {
+	Write-Host "`nUsage: lots.ps1 [-NsDd] [-LogFile] [-Password] [-Email] [-SMTP] [-SrSet-Locationir]`r`n"
+	Write-Host "`t-N or -Noisy"
+	Write-Host "`t`tSets LOTS to output logs to the console as well as to the log file`r`n"
+	Write-Host "`t-s or -SendEmail"
+	Write-Host "`t`tSets LOTS to send an email to your inbox with the log files.`r`n" 
+	Write-Host "`t-SMTP"
+	Write-Host "`t`tThe SMTP server and port address to which LOTS connects to to send the email`r`n."
+	Write-Host "`t-Password"
+	Write-Host "`t`tIf you specify the -SendEmail flag, you must specify this flag to provide the password with which LOTS should connect to the SMTP server.`r`n" 
+	Write-Host "`t-Email"
+	Write-Host "`t`tSets the email with which LOTS will send the email.`r`n" 
+	Write-Host "`t-d or -DelEmail"
+	Write-Host "`t`tBy default, LOTS downloads a utility called sendEmail with which it sends the email to you with log files attached. Specify this flag if you want LOTS to delete the utility and its log files afterwards.`r`n" 
+	Write-Host "`t-d or -DelLogs"
+	Write-Host "`t`tSpecify this flag if you want LOTS to delete its log files after its execution.`r`n" 
+	Write-Host "`t-SrSet-Locationir"
+	Write-Host "`t`tSpecifies the Source directory which LOTS will create and clone the repositories into.`r`n" 
+}
+
+
 ###########################################################
 #     __  __      _        _____ _                    _
 #    |  \/  |__ _(_)_ _   |_   _| |_  _ _ ___ __ _ __| |
@@ -54,7 +109,7 @@ Write-Log "Removing SCOOP Environment variable" "verbose"
 
 # Install (Scoop)[http://github.com/lukesampson/scoop.wiki]
 Write-Log "Downloading SCOOP installer" "verbose"
-Invoke-WebRequest (new-object net.webclient).downloadstring('https://get.scoop.sh') 
+Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh') 
 Write-Log "Installed Scoop" "verbose"
 Start-Sleep -s 30
 
@@ -147,54 +202,3 @@ if ( $DelEmail ) {
 }
 
 
-############################################
-#    ___             _   _
-#   | __|  _ _ _  __| |_(_)___ _ _  ___
-#   | _| || | ' \/ _|  _| / _ \ ' \(_-<
-#   |_| \_,_|_||_\__|\__|_\___/_||_/__/
-#   
-############################################
-
-
-function Write-Log( $text, $lev ) {
-	$level = $lev.ToUpper()
-	Add-Content $LogFile "[$level]: $text"
-	if ( $Noisy ) {
-		Write-Host "[$level]: $text"
-	}
-}
-
-function Echo-Banner() {
-     Write-Host "`t _     ___  ____  ____     ___  _____   _____ _   _ _____"
-     Write-Host "`t| |   / _ \|  _ \|  _ \   / _ \|  ___| |_   _| | | | ____|"
-     Write-Host "`t| |  | | | | |_) | | | | | | | | |_      | | | |_| |  _|"
-     Write-Host "`t| |__| |_| |  _ <| |_| | | |_| |  _|     | | |  _  | |___"
-     Write-Host "`t|_____\___/|_| \_\____/   \___/|_|       |_| |_| |_|_____|"
-     Write-Host "`t"
-     Write-Host "`t          ____   ____ ____  ___ ____ _____ ____"
-     Write-Host "`t         / ___| / ___|  _ \|_ _|  _ \_   _/ ___|"
-     Write-Host "`t         \___ \| |   | |_) || || |_) || | \___ \"
-     Write-Host "`t          ___) | |___|  _ < | ||  __/ | |  ___) |"
-     Write-Host "`t         |____/ \____|_| \_\___|_|    |_| |____/   "
-     Write-Host "`t                                                  `a"      
-}
-
-function Echo-Help() {
-	Write-Host "`nUsage: lots.ps1 [-NsDd] [-LogFile] [-Password] [-Email] [-SMTP] [-SrSet-Locationir]`r`n"
-	Write-Host "`t-N or -Noisy"
-	Write-Host "`t`tSets LOTS to output logs to the console as well as to the log file`r`n"
-	Write-Host "`t-s or -SendEmail"
-	Write-Host "`t`tSets LOTS to send an email to your inbox with the log files.`r`n" 
-	Write-Host "`t-SMTP"
-	Write-Host "`t`tThe SMTP server and port address to which LOTS connects to to send the email`r`n."
-	Write-Host "`t-Password"
-	Write-Host "`t`tIf you specify the -SendEmail flag, you must specify this flag to provide the password with which LOTS should connect to the SMTP server.`r`n" 
-	Write-Host "`t-Email"
-	Write-Host "`t`tSets the email with which LOTS will send the email.`r`n" 
-	Write-Host "`t-d or -DelEmail"
-	Write-Host "`t`tBy default, LOTS downloads a utility called sendEmail with which it sends the email to you with log files attached. Specify this flag if you want LOTS to delete the utility and its log files afterwards.`r`n" 
-	Write-Host "`t-d or -DelLogs"
-	Write-Host "`t`tSpecify this flag if you want LOTS to delete its log files after its execution.`r`n" 
-	Write-Host "`t-SrSet-Locationir"
-	Write-Host "`t`tSpecifies the Source directory which LOTS will create and clone the repositories into.`r`n" 
-}
