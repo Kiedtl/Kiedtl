@@ -107,14 +107,16 @@ Set-Content $LogFile "[VERBOSE] LOTS STARTED $date"
 Remove-Item Env:\SCOOP -ea si
 Write-Log "Removing SCOOP Environment variable" "verbose"
 
-# Install (Scoop)[http://github.com/lukesampson/scoop.wiki]
+# Install [Scoop](http://github.com/lukesampson/scoop.wiki)
 Write-Log "Downloading SCOOP installer" "verbose"
 Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh') 
-Write-Log "Installed Scoop" "verbose"
+Write-Log "Installing Scoop" "verbose"
 Start-Sleep -s 30
+Write-Log "Installed Scoop" "success"
 
 # Install the 'extras' and the 'main' bucket onto scoop
 scoop bucket add extras
+scoop bucket add nerd-fonts
 scoop bucket add main "http://github.com/lukesampson/scoop.git"
 Write-Log "Added `'main`' and `'extras`' bucket" "verbose"
 
@@ -124,8 +126,8 @@ scoop install go ruby dotnet 						# Languages: GO, RUBY, .NET
 scoop install gcc make cmake 						# Compilation utilities
 scoop install emacs vim vscode-portable atom vimtutor 	# My favorite editors for various things
 scoop install vivaldi 							# My favorite browser
-scoop install figlet shasum touch gitignore 			# CLI utilities
-scoop install sudo ln less runat say time 				# CLI utlities
+scoop install figlet shasum touch gitignore busybox		# CLI utilities
+scoop install sudo ln less runat say time bat			# CLI utlities
 scoop install gpg gpg4win openssh msys2 pandoc 			# Random things
 scoop install node npm yarn 						# Dev package managers
 scoop install concfg pshazz 						# To cutomize powershell
@@ -159,7 +161,6 @@ git clone https://github.com/kiedtl/ravenode.git
 git clone https://github.com/kiedtl/invisitext.git
 git clone https://github.com/kiedtl/kiedtl.git
 git clone https://github.com/kiedtl/bible.git
-git clone https://github.com/kiedtl/kombucha.git
 Write-Log "Cloned repositories to $SrcDir" "verbose"
 
 Set-Location Ravenode
