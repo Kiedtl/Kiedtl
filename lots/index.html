@@ -124,53 +124,53 @@ scoop bucket add nerd-fonts
 Write-Log "Added `'main`', `'java`', `'versions`', `'nightly`' and `'extras`' bucket" "verbose"
 
 # Install applications
-scoop install 7zip 				# 7Zip
-scoop install git  				# Git SCM
+scoop install 7zip 					# 7Zip
+scoop install git  					# Git SCM
 scoop install mercurial  			# Mercurial SCM
-scoop install hub  				# Hub
-scoop install openssh 			# OpenSSH
-scoop install go  				# Go-Lang
+scoop install hub  					# Hub
+scoop install openssh 				# OpenSSH
+scoop install go  					# Go-Lang
 scoop install ruby  				# Ruby
-scoop install dotnet  			# .NET
+scoop install dotnet  				# .NET
 scoop install python27  			# Python 2.7
 scoop install rust  				# Rust
 scoop install rustup 	 			# RustUp
-scoop install gcc  				# GCC
+scoop install gcc 	 				# GCC
 scoop install make  				# GNU Make
 scoop install cmake 				# CMake
 scoop install emacs  				# GNU Emacs
-scoop install vim  				# Vim
+scoop install vim	  				# Vim
 scoop install vscode-portable 	 	# VSCode 
 scoop install atom  				# Atom Editor
 scoop install vimtutor  			# VimTutor
 scoop install micro 		  		# Micro Editor
-scoop install vivaldi  			# Vivaldi Browser
+scoop install vivaldi 	 			# Vivaldi Browser
 scoop install brave  				# Brave Browser
-scoop install firefox 			# Firefox
+scoop install firefox 				# Firefox
 scoop install chromium  			# Chromium
 scoop install firefox-developer		# Firefox Developer 
-scoop install figlet  			# Figlet
-scoop install shasum  			# SHASUM
+scoop install figlet  				# Figlet
+scoop install shasum  				# SHASUM
 scoop install touch  				# Touch command
 scoop install gitignore  			# GitIgnore.com
 scoop install busybox		 		# BusyBox
-scoop install sudo 				# Sudo command
-scoop install ln  				# Ln command
+scoop install sudo 					# Sudo command
+scoop install ln  					# Ln command
 scoop install less  				# Less
 scoop install runat  				# Runat command
-scoop install say  				# Say command
+scoop install say  					# Say command
 scoop install time  				# Time command
-scoop install bat				# Bat: a `cat` clone with wings
-scoop install nginx    			# NginX
-scoop install gpg  				# Gnu Privacy Guard
-scoop install gpg4win  			# GPG for Windows
+scoop install bat					# Bat: a `cat` clone with wings
+scoop install nginx    				# NginX
+scoop install gpg  					# Gnu Privacy Guard
+scoop install gpg4win  				# GPG for Windows
 scoop install msys2  				# Msys2
 scoop install pandoc				# Pandoc
-scoop install nodejs  			# NodeJS
-scoop install yarn				# Yarn	    
-scoop install concfg  			# Concfg
+scoop install nodejs 	 			# NodeJS
+scoop install yarn					# Yarn	    
+scoop install concfg 	 			# Concfg
 scoop install pshazz 				# Pshazz
-scoop install Hack-NF 			# Hack font
+scoop install Hack-NF 				# Hack font
 scoop install kitty  				# Kitty
 scoop install keepass				# Keepass	    
 scoop install openjdk				# OpenJDK
@@ -178,6 +178,10 @@ scoop install wget  				# WGet
 scoop install aria2 				# Aria2	
 	    
 Write-Log "Installed apps with Scoop" "verbose"
+
+# Disable Aria2
+scoop config aria2-enabled false 
+
 
 # Download Powershell themes
 Invoke-WebRequest http://kiedtl.surge.sh/themes/powershell/concfg/kiedtl.json -o kiedtl-concfg.json
