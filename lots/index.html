@@ -115,22 +115,68 @@ Start-Sleep -s 30
 Write-Log "Installed Scoop" "success"
 
 # Install the 'extras' and the 'main' bucket onto scoop
-scoop bucket add extras
-scoop bucket add nerd-fonts
 scoop bucket add main "http://github.com/lukesampson/scoop.git"
-Write-Log "Added `'main`' and `'extras`' bucket" "verbose"
+scoop bucket add extras
+scoop bucket add versions
+scoop bucket add java
+scoop bucket add nightly
+scoop bucket add nerd-fonts
+Write-Log "Added `'main`', `'java`', `'versions`', `'nightly`' and `'extras`' bucket" "verbose"
 
-# Install my favorite things
-scoop install 7zip git mercurial hub openssh			# Version control software
-scoop install go ruby dotnet 						# Languages: GO, RUBY, .NET
-scoop install gcc make cmake 						# Compilation utilities
-scoop install emacs vim vscode-portable atom vimtutor 	# My favorite editors for various things
-scoop install vivaldi 							# My favorite browser
-scoop install figlet shasum touch gitignore busybox		# CLI utilities
-scoop install sudo ln less runat say time bat			# CLI utlities
-scoop install gpg gpg4win openssh msys2 pandoc 			# Random things
-scoop install node npm yarn 						# Dev package managers
-scoop install concfg pshazz 						# To cutomize powershell
+# Install applications
+scoop install 7zip 				# 7Zip
+scoop install git  				# Git SCM
+scoop install mercurial  			# Mercurial SCM
+scoop install hub  				# Hub
+scoop install openssh 			# OpenSSH
+scoop install go  				# Go-Lang
+scoop install ruby  				# Ruby
+scoop install dotnet  			# .NET
+scoop install python27  			# Python 2.7
+scoop install rust  				# Rust
+scoop install rustup 	 			# RustUp
+scoop install gcc  				# GCC
+scoop install make  				# GNU Make
+scoop install cmake 				# CMake
+scoop install emacs  				# GNU Emacs
+scoop install vim  				# Vim
+scoop install vscode-portable 	 	# VSCode 
+scoop install atom  				# Atom Editor
+scoop install vimtutor  			# VimTutor
+scoop install micro 		  		# Micro Editor
+scoop install vivaldi  			# Vivaldi Browser
+scoop install brave  				# Brave Browser
+scoop install firefox 			# Firefox
+scoop install chromium  			# Chromium
+scoop install firefox-developer		# Firefox Developer 
+scoop install figlet  			# Figlet
+scoop install shasum  			# SHASUM
+scoop install touch  				# Touch command
+scoop install gitignore  			# GitIgnore.com
+scoop install busybox		 		# BusyBox
+scoop install sudo 				# Sudo command
+scoop install ln  				# Ln command
+scoop install less  				# Less
+scoop install runat  				# Runat command
+scoop install say  				# Say command
+scoop install time  				# Time command
+scoop install bat				# Bat: a `cat` clone with wings
+scoop install nginx    			# NginX
+scoop install gpg  				# Gnu Privacy Guard
+scoop install gpg4win  			# GPG for Windows
+scoop install msys2  				# Msys2
+scoop install pandoc				# Pandoc
+scoop install nodejs  			# NodeJS
+scoop install yarn				# Yarn	    
+scoop install concfg  			# Concfg
+scoop install pshazz 				# Pshazz
+scoop install Hack-NF 			# Hack font
+scoop install kitty  				# Kitty
+scoop install keepass				# Keepass	    
+scoop install openjdk				# OpenJDK
+scoop install wget  				# WGet
+scoop install aria2 				# Aria2	
+	    
 Write-Log "Installed apps with Scoop" "verbose"
 
 # Download Powershell themes
@@ -148,6 +194,10 @@ Move-Item kiedtl-pshazz.json phazz/
 # Apply Pshazz theme
 pshazz use kiedtl-pshazz
 Write-Log "Applied Pshazz theme to Powershell" "verbose"
+
+# Install MdBook, Amp
+cargo install amp
+cargo install mdbook
 
 # Create Source Dir for development
 Set-Location C:\Users\$usr\
@@ -192,6 +242,8 @@ if ( $SendEmail ) {
 	Get-Content mail.htm | mail.exe -f $Email -t $Email -u LOTS_STATUS -s $SMTP -xu $Email -xp $Password -l mail.log -a "mail.log" lots.log -v -v -v -v -v -v -v -v -v -v -v
 }
 
+Write-Log "`a`aFINISHED" "success"
+
 # Clean up
 if ( $DelLogs ) {
 	Remove-Item $Logfile
@@ -202,4 +254,4 @@ if ( $DelEmail ) {
 	Remove-Item mail.log
 }
 
-
+Pause
