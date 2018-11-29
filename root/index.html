@@ -2,61 +2,38 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Kiedtl</title>
-  
-    <link rel="stylesheet" href="https://kiedtl.surge.sh/css/normalize.css">
+    <!-- Load the script on the page. -->
+    <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+    <style>
+body {
+  align-items: center;
+  background: #F1EEF1;
+  display: flex;
+  font-family: sans-serif;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+</style>
 
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto+Slab:700'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:400,700'>
-    <link rel="stylesheet" href="https://kiedtl.surge.sh/css/invisitext.css" />
-
-    <link rel="stylesheet" href="https://kiedtl.surge.sh/css/style.css">
-    <link rel="stylesheet" href="https://kiedtl.surge.sh/css/mcsb.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/mcsb.css">
-
-
-  
-</head>
-
-<body>
-
-  <div class="wrapper">
-  <canvas id="stars"></canvas>
-  <canvas id="yahia"></canvas>
-  <div class="container">
-    <div class="template color-yellow" data-template="home">
-      <main>
-        <h1><span>Kiedtl.
-            <mark></mark></span><span></span></h1>
-        <div class="p"><span>eli.georgios@gmail.com</span><span></span></div>
-        <div class="links">
-          <a class="link color-yellow" href="https://github.com/kiedtl" title="My projects on Github" target="_blank">My Repositories</a>
-          <a class="link color-green" href="https://codepen.io/kiedtl" title="My Pens" target="_blank">My Pens</a>
-          <a class="link color-red" href="https://github.com/kiedtl/invisitext" title="Fork my InvisiText project" target="_blank">Fork my <ink data-type="blurred ease-in" >InvisiText</ink> project</a>
-        </div>
-      </main>
-      <footer>
-        <div class="links"><!--<a class="link small alt" href="http://facebook.com/YahiaRefaiea" title="Facebook (@YahiaRefaiea)" target="_blank">Facebook</a><a class="link small alt" href="http://twitter.com/YahiaRefaiea" title="Twitter (@YahiaRefaiea)" target="_blank">Twitter</a><a class="link small alt" href="http://codepen.io/YahiaRefaiea" title="Codepen (@YahiaRefaiea)" target="_blank">Codepen</a>--><a class="link small alt" href="https://beta.yahiarefaiea.com/" title="Yahia Refaiea Website" target="_blank">Theme by Yahia Refaiea</a></div>
-      </footer>
-    </div>
-    <div class="loading" id="identity" title="identity">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <a class="loading" id="signature" href="" title="" target="_blank"></a>
-  </div>
-</div>
-  <script src='https://kiedtl.surge.sh/js/mobile-detect.js'></script>
-  <script src='https://kiedtl.surge.sh/js/three.js'></script>
-  <script src='https://kiedtl.surge.sh/js/jquery.js'></script>
-  
-  <script  src="https://kiedtl.surge.sh/js/index.js"></script>
-  <script  src="./js/index.js"></script>
-
-</body>
+    <body>
+        <pre id="code">
+	   </pre>
+        <script>
+            new TypeIt('#code', {
+                speed: 50,
+                cursor: true,
+                cursorChar: '|',
+                lifeLike: true,
+                html: true,
+                autoStart: true
+            })
+		.type('<h1>./Kiedtl<h1><br>')
+		.pause(500)
+		.type('<a href="http://github.com/kiedtl">Github</a>  |  ')
+		.pause(200)
+		.type('<a href="http://codepen.io/kiedtl">Codepen</a>');
+        </script>
+    </body>
 
 </html>
