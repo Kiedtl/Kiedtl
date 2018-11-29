@@ -1,27 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- Load the script on the page. -->
-<script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js" ></script>
-<style></style>
-<body>
-<pre id="code">
 param (
-          [string]$LogFile = "C:\Users\$env:USERNAME\lots.log",
-          [string]$Password,
-          [string]$Email,
-          [string]$STMP,
-          [string]$SrcDir = "Source",
-          [switch]$Noisy = $false,
-          [switch]$SendEmail = $false,
-          [switch]$DelEmail = $false,
-          [switch]$DelLogs = $false,
-          [switch]$H = $false,
-          [switch]$Help = $false,
-          [switch]$N = $false,
-          [switch]$S = $false,
-          [switch]$D = $false,
-          [switch]$L = $false
+    [string]$LogFile = "C:\Users\$env:USERNAME\lots.log",
+    [string]$Password,
+    [string]$Email,
+    [string]$STMP,
+    [string]$SrcDir = "Source",
+    [switch]$Noisy = $false,
+    [switch]$SendEmail = $false,
+    [switch]$DelEmail = $false,
+    [switch]$DelLogs = $false,
+    [switch]$H = $false,
+    [switch]$Help = $false,
+    [switch]$N = $false,
+    [switch]$S = $false,
+    [switch]$D = $false,
+    [switch]$L = $false
 
  )
 
@@ -41,46 +33,46 @@ Set-Location C:\Users\$usr\
 
 
 function Write-Log( $text, $lev ) {
-          $level = $lev.ToUpper()
-          Add-Content $LogFile "[$level]: $text"
-          if ( $Noisy ) {
-          	Write-Host "[$level]: $text"
-          }
+	$level = $lev.ToUpper()
+	Add-Content $LogFile "[$level]: $text"
+	if ( $Noisy ) {
+		Write-Host "[$level]: $text"
+	}
 }
 
 function Echo-Banner() {
-          Write-Host "`t _     ___  ____  ____     ___  _____   _____ _   _ _____"
-          Write-Host "`t| |   / _ \|  _ \|  _ \   / _ \|  ___| |_   _| | | | ____|"
-          Write-Host "`t| |  | | | | |_) | | | | | | | | |_      | | | |_| |  _|"
-          Write-Host "`t| |__| |_| |  _ <| |_| | | |_| |  _|     | | |  _  | |___"
-          Write-Host "`t|_____\___/|_| \_\____/   \___/|_|       |_| |_| |_|_____|"
-          Write-Host "`t"
-          Write-Host "`t          ____   ____ ____  ___ ____ _____ ____"
-          Write-Host "`t         / ___| / ___|  _ \|_ _|  _ \_   _/ ___|"
-          Write-Host "`t         \___ \| |   | |_) || || |_) || | \___ \"
-          Write-Host "`t          ___) | |___|  _ < | ||  __/ | |  ___) |"
-          Write-Host "`t         |____/ \____|_| \_\___|_|    |_| |____/   "
-          Write-Host "`t                                                  `a"      
+     Write-Host "`t _     ___  ____  ____     ___  _____   _____ _   _ _____"
+     Write-Host "`t| |   / _ \|  _ \|  _ \   / _ \|  ___| |_   _| | | | ____|"
+     Write-Host "`t| |  | | | | |_) | | | | | | | | |_      | | | |_| |  _|"
+     Write-Host "`t| |__| |_| |  _ <| |_| | | |_| |  _|     | | |  _  | |___"
+     Write-Host "`t|_____\___/|_| \_\____/   \___/|_|       |_| |_| |_|_____|"
+     Write-Host "`t"
+     Write-Host "`t          ____   ____ ____  ___ ____ _____ ____"
+     Write-Host "`t         / ___| / ___|  _ \|_ _|  _ \_   _/ ___|"
+     Write-Host "`t         \___ \| |   | |_) || || |_) || | \___ \"
+     Write-Host "`t          ___) | |___|  _ < | ||  __/ | |  ___) |"
+     Write-Host "`t         |____/ \____|_| \_\___|_|    |_| |____/   "
+     Write-Host "`t                                                  `a"      
 }
 
 function Echo-Help() {
-          Write-Host "`nUsage: lots.ps1 [-NsDd] [-LogFile] [-Password] [-Email] [-SMTP] [-SrSet-Locationir]`r`n"
-          Write-Host "`t-N or -Noisy"
-          Write-Host "`t`tSets LOTS to output logs to the console as well as to the log file`r`n"
-          Write-Host "`t-s or -SendEmail"
-          Write-Host "`t`tSets LOTS to send an email to your inbox with the log files.`r`n" 
-          Write-Host "`t-SMTP"
-          Write-Host "`t`tThe SMTP server and port address to which LOTS connects to to send the email`r`n."
-          Write-Host "`t-Password"
-          Write-Host "`t`tIf you specify the -SendEmail flag, you must specify this flag to provide the password with which LOTS should connect to the SMTP server.`r`n" 
-          Write-Host "`t-Email"
-          Write-Host "`t`tSets the email with which LOTS will send the email.`r`n" 
-          Write-Host "`t-d or -DelEmail"
-          Write-Host "`t`tBy default, LOTS downloads a utility called sendEmail with which it sends the email to you with log files attached. Specify this flag if you want LOTS to delete the utility and its log files afterwards.`r`n" 
-          Write-Host "`t-d or -DelLogs"
-          Write-Host "`t`tSpecify this flag if you want LOTS to delete its log files after its execution.`r`n" 
-          Write-Host "`t-SrSet-Locationir"
-          Write-Host "`t`tSpecifies the Source directory which LOTS will create and clone the repositories into.`r`n" 
+	Write-Host "`nUsage: lots.ps1 [-NsDd] [-LogFile] [-Password] [-Email] [-SMTP] [-SrSet-Locationir]`r`n"
+	Write-Host "`t-N or -Noisy"
+	Write-Host "`t`tSets LOTS to output logs to the console as well as to the log file`r`n"
+	Write-Host "`t-s or -SendEmail"
+	Write-Host "`t`tSets LOTS to send an email to your inbox with the log files.`r`n" 
+	Write-Host "`t-SMTP"
+	Write-Host "`t`tThe SMTP server and port address to which LOTS connects to to send the email`r`n."
+	Write-Host "`t-Password"
+	Write-Host "`t`tIf you specify the -SendEmail flag, you must specify this flag to provide the password with which LOTS should connect to the SMTP server.`r`n" 
+	Write-Host "`t-Email"
+	Write-Host "`t`tSets the email with which LOTS will send the email.`r`n" 
+	Write-Host "`t-d or -DelEmail"
+	Write-Host "`t`tBy default, LOTS downloads a utility called sendEmail with which it sends the email to you with log files attached. Specify this flag if you want LOTS to delete the utility and its log files afterwards.`r`n" 
+	Write-Host "`t-d or -DelLogs"
+	Write-Host "`t`tSpecify this flag if you want LOTS to delete its log files after its execution.`r`n" 
+	Write-Host "`t-SrSet-Locationir"
+	Write-Host "`t`tSpecifies the Source directory which LOTS will create and clone the repositories into.`r`n" 
 }
 
 
@@ -96,12 +88,12 @@ function Echo-Help() {
 # If the -H or the -h or the -Help or the -help flag is specified, 
 # print the help message and exit.
 if ( $H ) {
-          Echo-Help
-          exit
+	Echo-Help
+	exit
 }
 if ( $Help ) {
-          Echo-Help
-          exit
+	Echo-Help
+	exit
 }
 
 
@@ -251,32 +243,19 @@ Write-Log "Downloaded sendEmail and email template" "verbose"
 
 # Send the email
 if ( $SendEmail ) {
-          Get-Content mail.htm | mail.exe -f $Email -t $Email -u LOTS_STATUS -s $SMTP -xu $Email -xp $Password -l mail.log -a "mail.log" lots.log -v -v -v -v -v -v -v -v -v -v -v
+	Get-Content mail.htm | mail.exe -f $Email -t $Email -u LOTS_STATUS -s $SMTP -xu $Email -xp $Password -l mail.log -a "mail.log" lots.log -v -v -v -v -v -v -v -v -v -v -v
 }
 
 Write-Log "`a`aFINISHED" "success"
 
 # Clean up
 if ( $DelLogs ) {
-          Remove-Item $Logfile
+	Remove-Item $Logfile
 }
 if ( $DelEmail ) {
-          Remove-Item mail.exe
-          Remove-Item mail.htm
-          Remove-Item mail.log
+	Remove-Item mail.exe
+	Remove-Item mail.htm
+	Remove-Item mail.log
 }
 
 Pause
-</pre>
-<script>
-new TypeIt('#code', {
-  speed: 90,
-  cursor: true,
-  cursorChar: '|',
-  lifeLike: true,
-  html: true,
-  autoStart: true
-});
-</script>
-</body>
-</html>
