@@ -3,7 +3,7 @@
 
 <head>
     <!-- Load the script on the page. -->
-    <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+    <script src="https://kiedtl.surge.sh/js/typeit.js"></script>
     <style>
 		body {
 		  align-items: center;
@@ -14,6 +14,23 @@
 		  height: 100vh;
 		  margin: 0;
 		}
+
+ 		a {
+		 background: linear-gradient(to bottom, #cdcdcd, #cdcdcd) 50% calc(100% - 2px) / 50% 2px no-repeat;
+    		 color: #333;
+	     	 margin: -1px;
+            text-decoration: none !important;
+            -webkit-transition: all .35s ease-in-out;
+            transition: all .35s ease-in-out; }
+
+           a:hover, a:focus {
+		  background-image: linear-gradient(to bottom, #777, #777);
+		  background-size: 100% 3px;
+		  color: #111; 
+             -webkit-transition: all .35s ease-in-out !important;
+             transition: all .35s ease-in-out !important; 
+           }
+
     </style>
 
     <body>
@@ -26,7 +43,7 @@
                 cursorChar: '|',
                 lifeLike: true,
                 html: true,
-                autoStart: true
+                autoStart: false
             })
 		.type('<h1>./Kiedtl<h1><br>')
 		.pause(500)
@@ -64,11 +81,7 @@
 		.type('<a href="https://codepen.io/kiedtl/pen/dzwpzZ">Hexadecimal Clock</a>')
 		.pause(800)
 		.break()
-		.type('<a href="https://codepen.io/kiedtl/pen/qXMNwx">InvisiText Playground</a>')
-		.break()
-		.break()
-		.break();
-
+		.type('<a href="https://codepen.io/kiedtl/pen/qXMNwx">InvisiText Playground</a>');
         </script>
     </body>
 </html>
