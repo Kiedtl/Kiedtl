@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kiedtl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Kiedtl</title>
+    <!-- Load TypeIt. -->
+    <script src="https://kiedtl.surge.sh/js/typeit.js"></script>
+    <style>
+        body {
+            align-items: center;
+            background: #F1EEF1;
+            display: flex;
+            font-family: sans-serif;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        p,
+        div.content {
+            text-align: center;
+        }
+        div.content {
+            display: block;
+            font-family: monospace;
+            /* white-space: pre; This bit causes trouble with TypeIt */
+            margin: 1em 0;
+            font-size: 0.85em
+        }
+        small {
+            font-size: 0.01em
+        }
+        a {
+            background: linear-gradient(to bottom, #cdcdcd, #cdcdcd) 50% calc(100% - 2px) / 50% 2px no-repeat;
+            color: #333;
+            margin: -1px;
+            text-decoration: none !important;
+            -webkit-transition: all .35s ease-in-out;
+            transition: all .35s ease-in-out;
+        }
+        a: hover, a: focus {
+            background-image: linear-gradient(to bottom, #777, #777);
+            background-size: 100% 3px;
+            color: #111;
+            -webkit-transition: all .35s ease-in-out !important;
+            transition: all .35s ease-in-out !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">
+        <small></small> 
+    </div>
+    <script>
+        	new TypeIt('#content', {
+            speed: 50,
+            cursor: false,
+            cursorChar: '|',
+            lifeLike: true,
+            html: true,
+            autoStart: true
+          })
+            .type('<h1>404</h1><br>')
+            .type('<h3>PAGE NOT FOUND<h3>')
+            .break()
+            .break()
+            .options({
+                speed: 60
+            })
+            .pause(500)
+            .type('<a href="http://kiedtl.surge.sh/">HOME</a>  |  ')
+            .pause(200)
+            .type('<a onclick="window.history.go(-1);" href="javascript:void(0);">GO BACK</a>')
+            .pause(250)
+            .break();
+    </script>
+</body>
+
+</html>
