@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <!-- Load the script on the page. -->
+    <meta charset="UTF-8">
+    <meta name="author" content="Kiedtl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Kiedtl</title>
+    <!-- Load TypeIt. -->
     <script src="https://kiedtl.surge.sh/js/typeit.js"></script>
     <style>
-		body {
-		  align-items: center;
-		  background: #F1EEF1;
-		  display: flex;
-		  font-family: sans-serif;
-		  justify-content: center;
-		  height: 100vh;
-		  margin: 0;
-		}
-
- 		a {
-		 background: linear-gradient(to bottom, #cdcdcd, #cdcdcd) 50% calc(100% - 2px) / 50% 2px no-repeat;
-    		 color: #333;
-	     	 margin: -1px;
-            text-decoration: none !important;
-            -webkit-transition: all .35s ease-in-out;
-            transition: all .35s ease-in-out; }
-
-           a:hover, a:focus {
-		  background-image: linear-gradient(to bottom, #777, #777);
-		  background-size: 100% 3px;
-		  color: #111; 
+         body {
+             align-items: center;
+             background: #F1EEF1;
+             display: flex;
+             font-family: sans-serif;
+             justify-content: center;
+             height: 100vh;
+             margin: 0;
+        }
+         div.content {
+             display: block;
+             font-family: monospace;
+             /* white-space: pre; This bit causes trouble with TypeIt */
+             margin: 1em 0;
+		  font-size: 0.85em
+        }
+         a {
+             background: linear-gradient(to bottom, #cdcdcd, #cdcdcd) 50% calc(100% - 2px) / 50% 2px no-repeat;
+             color: #333;
+             margin: -1px;
+             text-decoration: none !important;
+             -webkit-transition: all .35s ease-in-out;
+             transition: all .35s ease-in-out;
+        }
+         a:hover, a:focus {
+             background-image: linear-gradient(to bottom, #777, #777);
+             background-size: 100% 3px;
+             color: #111;
              -webkit-transition: all .35s ease-in-out !important;
-             transition: all .35s ease-in-out !important; 
-           }
-
-    </style>
+             transition: all .35s ease-in-out !important;
+        }    </style>
 
     <body>
-        <pre id="content">
-	   </pre>
+        <div class="content" id="content">
+	   </div>
         <script>
             new TypeIt('#content', {
-                speed: 50,
+                speed: 130,
                 cursor: true,
                 cursorChar: '|',
                 lifeLike: true,
@@ -46,6 +53,7 @@
                 autoStart: false
             })
 		.type('<h1>./Kiedtl<h1><br>')
+		.options( { speed: 60 } )
 		.pause(500)
 		.type('<a href="http://github.com/kiedtl">Github</a>  |  ')
 		.pause(200)
@@ -54,7 +62,7 @@
 		.break()
 		.break()
 		.break()
-		.type('<b>PROJECTS:</b>')
+		.type('<b>GITHUB PROJECTS')
 		.break()
 		.type('<a href="http://github.com/kiedtl/invisitext">InvisiText Repository</a>')
 		.break()
@@ -79,7 +87,7 @@
 		.pause(100)
 		.break()
 		.type('<a href="https://codepen.io/kiedtl/pen/dzwpzZ">Hexadecimal Clock</a>')
-		.pause(800)
+		.pause(268)
 		.break()
 		.type('<a href="https://codepen.io/kiedtl/pen/qXMNwx">InvisiText Playground</a>');
         </script>
