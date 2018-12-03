@@ -103,10 +103,6 @@ Echo-Banner
 # Create two files to log onto 
 Set-Content $LogFile "[VERBOSE] LOTS STARTED $date"
 
-# Remove environment variables that might mess up Scoop installation
-Remove-Item Env:\SCOOP -ea si
-Write-Log "Removing SCOOP Environment variable" "verbose"
-
 # Install [Scoop](http://github.com/lukesampson/scoop.wiki)
 Write-Log "Downloading SCOOP installer" "verbose"
 Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh') 
@@ -172,7 +168,8 @@ scoop install concfg 	 			# Concfg
 scoop install pshazz 				# Pshazz
 scoop install Hack-NF 				# Hack font
 scoop install kitty  				# Kitty
-scoop install keepass				# Keepass	    
+scoop install keepass				# Keepass	 
+scoop install vlc				# VLC Player   
 scoop install openjdk				# OpenJDK
 scoop install wget  				# WGet
 scoop install aria2 				# Aria2	
