@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kiedtl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Title Goes Here</title>
+    <!-- Load TypeIt. -->
+    <script src="https://kiedtl.surge.sh/js/typeit.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+        <div class="content" id="content">
+		<small></small>
+	   </div>
+        <script>
+            new TypeIt('#content', {
+                speed: 30,
+                cursor: true,
+                cursorChar: '|',
+                lifeLike: true,
+                html: true,
+                autoStart: true
+            })
+		.type('<h1>Blah Blah<h1><br>')
+		.options( { speed: 60 } )
+		.pause(500)
+		.type('<a href="http://twitter.com">Twitter</a>  |  ')
+		.pause(200)
+		.type('<a href="http://facebook.com">Facebook</a>')
+		.pause(250)
+		.break()
+		.break()
+		.break()
+		.type('<b>MY PROJECTS:</b>')
+		.break()
+		.type('<a href="http://github.com/kiedtl/invisitext">This Repository</a>')
+		.break()
+		.type('<a href="http://github.com/kiedtl/dinorun">That Repository</a>')
+		.break()
+		.type('<a href="http://github.com/kiedtl/ravenode">Another Repository</a>')
+		.break()
+		.break()
+		.break()
+		.type('<b>GITHUB GISTS:</b>')
+		.break()
+		.type('<a href="https://gist.github.com/Kiedtl/06f728a414a7804826c378b214bf7726">BlahBlah Script</a>')
+		.pause(100)
+		.break()
+		.type('<a href="https://gist.github.com/Kiedtl/7a7ad2d4ca3731b0ebc4c97920efdc36">Thisandthat Gist</a>')
+		.break();
+        </script>
+    </body>
+</html>
