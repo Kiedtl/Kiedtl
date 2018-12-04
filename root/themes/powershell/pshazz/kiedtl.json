@@ -1,9 +1,11 @@
 {
 	"plugins": [ "git", "ssh", "z" ],
 	"prompt": [
-		[ "cyan",   "", "`n$git_branch" ],
-		[ "red",   "", " $git_local_state" ],
+		[ "red",	"", "`n$user" ],
+		[ "", "", "@$hostname" ],
+		[ "blue",   "", " $git_local_state" ],
 		[ "cyan",   "", " $git_remote_state" ],
+		[ "cyan",   "", " ($git_branch)" ],
 		[ "yellow",  "", " $dir" ],
 		[ "green", "", " `n`$" ]
 	],
