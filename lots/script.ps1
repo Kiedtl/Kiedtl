@@ -121,9 +121,12 @@ Write-Log "Added `'main`', `'java`', `'versions`', `'nightly`' and `'extras`' bu
 
 # Install applications
 scoop install 7zip 					# 7Zip
+scoop install openssl				# OpenSSL
 scoop install git  					# Git SCM
 scoop install mercurial  			# Mercurial SCM
 scoop install hub  					# Hub
+scoop install github				# Github desktop
+scoop install gitkraken				# GitKraken
 scoop install openssh 				# OpenSSH
 scoop install go  					# Go-Lang
 scoop install ruby  				# Ruby
@@ -141,11 +144,15 @@ scoop install atom  				# Atom Editor
 scoop install vimtutor  			# VimTutor
 scoop install micro 		  		# Micro Editor
 scoop install vivaldi 	 			# Vivaldi Browser
+scoop install gimp					# GIMP
+scoop install filezilla 			# Filezilla
 scoop install brave  				# Brave Browser
 scoop install firefox 				# Firefox
 scoop install chromium  			# Chromium
 scoop install firefox-developer		# Firefox Developer 
+scoop install vcredist2017			# Visual Studio
 scoop install figlet  				# Figlet
+scoop install leet					# Leet utility
 scoop install shasum  				# SHASUM
 scoop install touch  				# Touch command
 scoop install gitignore  			# GitIgnore.com
@@ -168,11 +175,15 @@ scoop install concfg 	 			# Concfg
 scoop install pshazz 				# Pshazz
 scoop install Hack-NF 				# Hack font
 scoop install kitty  				# Kitty
-scoop install keepass				# Keepass	 
-scoop install vlc				# VLC Player   
+scoop install keepass				# Keepass
+scoop install keeweb				# Keeweb	 
+scoop install vlc					# VLC Player   
 scoop install openjdk				# OpenJDK
 scoop install wget  				# WGet
 scoop install aria2 				# Aria2	
+scoop install winrar				# WinRAR
+scoop install zip					# Zip utility
+scoop install shim					# Shim creator
 	    
 Write-Log "Installed apps with Scoop" "verbose"
 
