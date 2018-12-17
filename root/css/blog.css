@@ -36,6 +36,7 @@
          margin: 1em 0;font-family: 'Josefin Sans', sans-serif;
         	 font-size: 0.85em
          }
+h2 { font-style: italic; font-family: 'Raleway', sans-serif;
         
         a {
          background: linear-gradient(to bottom, #cdcdcd, #cdcdcd) 50% calc(100% - 2px) / 50% 2px no-repeat;
