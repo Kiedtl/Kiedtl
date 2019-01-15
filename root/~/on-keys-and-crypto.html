@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>On Keys and Crypto | Kied Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet" />
+    <link href="css/hint.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css' />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
+    <script src="js/prace.js"></script>
+    <script src="js/automatic-eureka.js"></script>
+
+  </head>
+  <body onload="praceInit('pre'); automaticEurekaInit();" >
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/on-keys-and-crypto-header.gif')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>On Keys and Crypto</h1>
+              <h2 class="subheading">Re-auditing GitHub users' SSH key quality</h2>
+              <span style="font-family: Hack, monospace;" class="meta">kied ~\llaentenn &#57504; 026b484 &#8803; ~3 +21 -18 &#10095;&#10095;&#10095;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p>A lot of us have heard of OpenSSH (or Win32-SSH, or Tectia SSH, or whatever) these days. SSH has become an invaluable tool, from securely connecting to a Linux server to pushing Git commits to GitHub.</p>
+
+            <p>Several months ago, I decided to re-create the experiment that Ben Cox (<a href="https://github.com/benjojo" >@benjojo</a>) did with some SSH keys. Basically, what he did was create a program that crawl GitHub somehow (I have no idea how, except that he used the GitHub API) that would spit out a couple hundred thousand usernames. According to his <a href="https://blog.benjojo.co.uk/post/auditing-github-users-keys">blog post</a>, he set this program to run from December 27th, 2014 to January 9th, 2015. When he finally shut the program down, it had collected over 1,370,000 usernames to experiment with.</p>
+
+            <p>The very next thing he did was write another script to get the public SSH key for each user. Of course, a certain percentage of users hadn't set a SSH key for their account (I think it was around 30%), but the majority of users still had an SSH key, be it RSA, DSA, ECC, or otherwise.</p>
+
+            <p>The script that he wrote would go to their GitHub profile page + '.keys' and the SSH key would be there waiting. For example, to see Linus Torvald's SSH key, the script/program would navigate over to <code>https://github.com/torvalds.keys</code> and download the data.</p>
+
+            <p>He got some interesting statistics from this massive database. He discovered that, out of around 1,234,082 users who did have SSH keys, about 9 of them had insecure keys. That is, out of the 1,234,082 users who had SSH keys, about 0.000729287032790366% had keys that were too small (less than 1000 bits, much lower than the recommended 2048 bits) to provide reasonable security. What's worse, two or three of those users had RSA keys less than 256 bits. (Just to get that into perspective, keys of 512 bits, which have twice as many digits as keys of 256 bits, were broken back in 1999, almost 20 years ago. Meanwhile, Cox has reported on his blog post that he successfully cracked a 256 bit RSA key in less than half an hour on a computer with an i5 Intel CPU.)</p>
+            <p>Anyway.</p>
+            <p>The reason I messing around with this for the next two weeks is because I want to see if the statistics have changed since 2015 when Cox did his original tests. After all, GitHub reported they have way more users in 2017/2018 than two years before.</p>
+            <p>The first step is to get a massive list of all the GitHub users I can find. I am using the GitHub Developer API (v3) with OAuth authorization. Here is the source for the PowerShell script, which gets a list of GitHub users in the order in which they signed up and then downloads the SSH key:</p>
+            <pre lang="powershell" theme="tomorrow" >
+$sp = "|","/","-","\"
+$sp_c = 0
+
+cls
+
+1..500000 | % {
+    $request = $_
+    $data = curl.exe -sSH "Authorization: token blahblahblahbittyblahblah" --url "https://api.github.com/users?since=${id}&per_page=100" | ConvertFrom-Json
+    for ($i = 0; $i -lt $data.Length; $i++) {
+        $key = curl.exe -sS --url "https://github.com/$($data[$i].login).keys"
+        sc -path "$($data[$i].login).key" -value "$key"
+        write-host "`r`r[ $($sp[($sp_c % ($sp.Length))]) ] ( P${request} : I$id : C$i ) Processing user $($data[$i].login)                                      " -nonewline
+        $sp_c++
+        if ($id -gt $data[$i].id) { } 
+        else { $id = $data[$i].id } 
+    } 
+}
+</pre>
+            <p>After this script has garnered a couple million usernames ad keys over a couple of weeks, I will use the following script to weed out usernames that to not exist and were added accidentally in the last script as the result of  the bug. It will also convert the files to UTF8:</p>
+            <pre lang="powershell" theme="tomorrow">
+cd ~/keys
+
+get-childitem .\*.key | % {
+    $a = gc $_
+    if ($a -like "*not*found*") { ri $_; continue } 
+    sc -path $_ -encoding utf8
+}
+
+</pre>
+            <p>After that, the following script will get more information about the keys and store it in a JSON file:</p>
+            <pre lang="powershell" theme="tomorrow">
+cd ~/keys
+
+get-childitem .\*.key | % {
+    $key			= gc $_ -raw
+    $key_info 		= ssh-keygen -qlf $_
+    $key_info			= $key_info.Split(" ")
+
+    $key_size			= $key_info[  0 ]
+    $key_hash			= $key_info[  1 ]
+    $key_type			= $key_info[ -1 ]
+
+    $info_obj			= new-object -type psobject
+    $info_obj 		| Add-Member -NotePropertyName key -NotePropertyValue $key
+    $info_obj 		| Add-Member -NotePropertyName key_size -NotePropertyValue $key_size
+    $info_obj 		| Add-Member -NotePropertyName key_hash -NotePropertyValue $key_hash
+    $info_obj 		| Add-Member -NotePropertyName key_type -NotePropertyValue $key_type
+
+    $info_jsn		= $info_obj | convertto-json -compress
+
+    sc -path $_ -value $info_jsn -encoding utf8
+}
+
+</pre>
+            <p>The user-collection script ran from February 11, 2018, to __________ and collected around 5,_____ usernames. I recorded a GIF of the script and you can see it on the header of this page.</p>
+            <p>As you can see, the user-collection script outputs some information regarding the progress of the script. On the left, it outputs the number of requests it made to GitHub, then the user ID it is processing, then the user it is processing of the list of users it received from GitHub.</p>
+            <p>Just for fun, I created a script that counts the number of users and displays the count along with the current time Like a process bar or a ledger, if you will.<br>Here is the code:</p>
+            <pre lang="powershell" theme="tomorrow">
+1..100000 | % { 
+    write-host "$([system.datetime]::now.tostring("t")) : $((ls | measure).Count) items" -f green 
+}
+</pre>
+
+            <h2 class="section-heading">Timeline</h2>
+
+            <p>Timeline coming soon...</p>
+
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://github.com/kiedtl">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Kied Llaentenn 2018. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>
